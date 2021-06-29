@@ -4,6 +4,8 @@ namespace Psalm\Internal\LanguageServer\Server;
 
 use Amp\Promise;
 use Amp\Success;
+use LanguageServerProtocol\CodeActionContext;
+use LanguageServerProtocol\Command;
 use LanguageServerProtocol\CompletionList;
 use LanguageServerProtocol\Hover;
 use LanguageServerProtocol\Location;
@@ -329,5 +331,19 @@ class TextDocument
         return new Success(new \LanguageServerProtocol\SignatureHelp([
             $signature_information,
         ], 0, $argument_location[1]));
+    }
+
+    public function codeAction(TextDocumentIdentifier $textDocument, Range $range, $context) {
+        $file_path = LanguageServer::uriToPath($textDocument->uri);
+
+        return new Success(
+            [
+                [
+                    'title' => 'Whee',
+                    'kind' => 'quickfix',
+                    'command'=>new Command('test', 'command.id', [])
+                ]
+            ]
+        );
     }
 }

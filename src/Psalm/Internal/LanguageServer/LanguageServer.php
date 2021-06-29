@@ -256,6 +256,7 @@ class LanguageServer extends AdvancedJsonRpc\Dispatcher
 
                 $serverCapabilities->textDocumentSync = $textDocumentSyncOptions;
 
+                $serverCapabilities->codeActionProvider = true;
                 // Support "Find all symbols"
                 $serverCapabilities->documentSymbolProvider = false;
                 // Support "Find all symbols in workspace"
